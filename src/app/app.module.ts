@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthGuard} from '../guards/auth.guard';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         {
           path: '',
           redirectTo: 'auth',
-          pathMatch:'full'
+          pathMatch: 'full'
         },
         {
           path: 'auth',
@@ -27,6 +28,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         },
         {
           path: 'app',
+          canActivate: [AuthGuard],
           loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
         }
 

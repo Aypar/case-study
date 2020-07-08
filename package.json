@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node server.js",
+    "build": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,6 +21,7 @@
     "@angular/router": "~10.0.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "express": "^4.17.1",
     "moment": "^2.27.0",
     "ngx-bootstrap": "^5.6.1",
     "rxjs": "~6.5.5",
