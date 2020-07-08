@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-4 offset-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="w-100 text-center my-2 font-weight-bold text-muted"> Case Study</div>
+              <input placeholder="Please enter your email" type="text" class="form-control my-2"
+                     [(ngModel)]="authModel.email">
+              <input placeholder="Please enter your password" type="password" class="form-control my-2"
+                     [(ngModel)]="authModel.password">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 d-flex justify-content-end">
+              <button (click)="login()" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
