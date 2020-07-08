@@ -5,7 +5,8 @@ import {RouterModule} from '@angular/router';
 import {TransactionReportComponent} from './transaction-report/transaction-report.component';
 import {TransactionListComponent} from './transaction-list/transaction-list.component';
 import {TransactionDetailComponent} from './transaction-detail/transaction-detail.component';
-
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [TransactionComponent, TransactionReportComponent, TransactionListComponent, TransactionDetailComponent],
@@ -17,8 +18,8 @@ import {TransactionDetailComponent} from './transaction-detail/transaction-detai
         component: TransactionComponent,
         children: [
           {
-            path:'',
-            redirectTo:'list'
+            path: '',
+            redirectTo: 'list'
           },
           {
             path: 'list',
@@ -34,7 +35,9 @@ import {TransactionDetailComponent} from './transaction-detail/transaction-detai
           }
         ]
       }
-    ])
+    ]),
+    BsDatepickerModule.forRoot(),
+    FormsModule
   ]
 })
 export class TransactionModule {

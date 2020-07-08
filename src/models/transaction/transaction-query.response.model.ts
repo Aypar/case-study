@@ -7,7 +7,7 @@ import {QueryResponseBaseModel} from '../base/query-response.base.model';
 export interface TransactionQueryResponseModel extends QueryResponseBaseModel {
   data?: Array<{
     fx: Array<FxModel>;
-    customerInfo: Array<CustomerInfoModel>;
+    customerInfo: CustomerInfoModel;
     merchant: Array<MerchantModel>;
     ipn: Array<string>;
     transaction: Array<{ referenceNo: string, status: string }>;

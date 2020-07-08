@@ -4,7 +4,7 @@ import {AuthenticationResponseModel} from '../../models/authentication/authentic
 import {ApiService} from './api.service';
 import {StorageService} from '../storage.service';
 import {Router} from '@angular/router';
-import {AxiosResponse} from 'axios';
+import {AxiosError, AxiosResponse} from 'axios';
 
 @Injectable({providedIn: 'root'})
 
@@ -14,7 +14,7 @@ export class AuthenticationService {
   }
 
 
-  login(authenticationRequestModel: AuthenticationRequestModel): Promise<boolean> {
+  login(authenticationRequestModel: AuthenticationRequestModel): Promise<boolean>{
     return this.apiService.post<AuthenticationResponseModel>('merchant/user/login', authenticationRequestModel)
       .setUseToken(false)
       .execute()

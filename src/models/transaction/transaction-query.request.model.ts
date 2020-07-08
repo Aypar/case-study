@@ -1,6 +1,6 @@
 export interface TransactionQueryRequestModel {
-  fromDate?:Date;
-  toDate?:Date;
+  fromDate?:string;
+  toDate?:string;
   status?:string;
   operation?:string;
   merchantId?:number

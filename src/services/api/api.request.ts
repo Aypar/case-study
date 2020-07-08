@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse, Method} from 'axios';
+import axios, {AxiosError, AxiosInstance, AxiosResponse, Method} from 'axios';
 import {environment} from '../../environments/environment';
 import {StorageService} from '../storage.service';
 
@@ -26,15 +26,21 @@ export class ApiRequest<T> {
     this.contentType = 'application/json';
   }
 
-  execute(): Promise<AxiosResponse<T>> {
+  execute(): Promise<AxiosResponse<T>> | any {
     return this.http.request<T>({
       baseURL: `${this.baseUrl}${this.endPoint}`,
       headers: this.getHeaders(),
       method: this.method,
       data: this.data
     }).then((response: AxiosResponse<T>) => {
+      if (response.status === 401) {
+        window.location.href = '/auth/login';
+      }
       return response;
-    }).catch(error => {
+    }).catch((error: AxiosError) => {
+      if (error.response.status === 401) {
+        window.location.href = '/auth/login';
+      }
       return error;
     });
   }
