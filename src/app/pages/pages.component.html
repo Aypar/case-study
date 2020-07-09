@@ -1,30 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Case Study</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mb-5">
+  <div class="container d-flex align-items-center">
+    <a class="navbar-brand font-weight-bold" routerLink="/app/transaction">Case Study</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li routerLinkActive="active" class="nav-item ">
-        <a class="nav-link" routerLink="/app/transaction">Transaction List <span class="sr-only">(current)</span></a>
-      </li>
-      <!--<li routerLinkActive="active" class="nav-item ">
-        <a class="nav-link" routerLink="/app/transaction/report">Transaction Report <span class="sr-only">(current)</span></a>
-      </li> -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li routerLinkActive="active" class="nav-item ">
+          <a class="nav-link" routerLink="/app/transaction">Transaction List <span class="sr-only">(current)</span></a>
+        </li>
+        <!--<li routerLinkActive="active" class="nav-item ">
+          <a class="nav-link" routerLink="/app/transaction/report">Transaction Report <span class="sr-only">(current)</span></a>
+        </li> -->
 
-    </ul>
-    <ul class="navbar-nav">
-      <li class="nav-item ">
-        <a class="btn btn-link nav-link" (click)="logout()">Logout</a>
-      </li>
-
-
-    </ul>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item ">
+          <a class="btn btn-link nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-<div class="container-fluid">
+<div class="container mb-5">
   <router-outlet></router-outlet>
 </div>
-
+<app-loading></app-loading>

@@ -1,0 +1,19 @@
+body {
+  background-color: #f7f9fa;
+}
+
+.border-radius-20 {
+  border-radius: 20px;
+}
+
+label {
+  font-weight: 700;
+  color: theme-color('secondary');
+  margin: 0;
+}
+
+input, select {
+  &.form-control {
+    font-weight: 600;
+  }
+}

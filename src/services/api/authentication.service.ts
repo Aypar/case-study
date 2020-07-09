@@ -4,7 +4,6 @@ import {AuthenticationResponseModel} from '../../models/authentication/authentic
 import {ApiService} from './api.service';
 import {StorageService} from '../storage.service';
 import {Router} from '@angular/router';
-import {AxiosError, AxiosResponse} from 'axios';
 
 @Injectable({providedIn: 'root'})
 

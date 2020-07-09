@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {PagesComponent} from './pages.component';
 import {RouterModule} from '@angular/router';
+import {SharedComponentsModule} from '../../shared-components/shared-components.module';
 
 @NgModule({
   declarations: [PagesComponent],
@@ -19,7 +20,8 @@ import {RouterModule} from '@angular/router';
           loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
         }
       ]
-    }])
+    }]),
+    SharedComponentsModule
   ]
 })
 export class PagesModule {

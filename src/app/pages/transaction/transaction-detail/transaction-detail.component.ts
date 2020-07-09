@@ -6,6 +6,7 @@ import {TransactionGetResponseModel} from '../../../../models/transaction/transa
 import {ClientService} from '../../../../services/api/client.service';
 import {ClientGetResponseModel} from '../../../../models/client/client-get.response.model';
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import {LoadingService} from '../../../../services/loading-service';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -22,6 +23,7 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
 
   constructor(private transactionService: TransactionService,
               private clientService: ClientService,
+              private loadingService: LoadingService,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -36,15 +38,21 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
   }
 
   getTransaction(transactionId: string) {
+    this.loadingService.show();
     this.transactionService.get({transactionId}).then(response => {
       this.transactionResponseModel = response.data;
+    }).finally(() => {
+      this.loadingService.hide();
     });
   }
 
   getClientDetail(transactionId: string) {
+    this.loadingService.show();
     this.clientService.get({transactionId}).then(response => {
       this.clientResponseModel = response.data;
       this.clientDetailModal.show();
+    }).finally(() => {
+      this.loadingService.hide();
     });
   }
 }

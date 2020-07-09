@@ -1,69 +1,69 @@
-<div class="row" *ngIf="transactionResponseModel">
-  <div class="col-6 offset-3">
-    <div class="row mb-3 pb-3 border-bottom">
-      <div class="col-12 font-weight-bold"> Transaction Detail
-        - {{transactionResponseModel?.transaction?.merchant?.transactionId}}</div>
-    </div>
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="row mb-4">
-              <div class="col-6">
-                <div class="font-weight-bold">
-                  Transaction ID
-                </div>
-                <span>{{transactionResponseModel?.transaction?.merchant?.transactionId}}</span>
-              </div>
-              <div class="col-6">
-                <div class="font-weight-bold">
-                  Merchant
-                </div>
-                <span>{{transactionResponseModel?.merchant?.name}}</span>
-              </div>
+<div *ngIf="transactionResponseModel" class="row mb-4">
+  <div class="col-12">
+    <div class="card border-radius-20 shadow">
+      <div class="card-body ">
+        <div class="border-bottom mb-3">
+          <h5 class="card-title">
+            Transaction Detail
+            -
+            <span class="text-muted">{{transactionResponseModel?.transaction?.merchant?.transactionId}} </span>
+          </h5>
+        </div>
+        <div class="row mb-4">
+          <div class="col-6">
+            <div class="font-weight-bold">
+              Transaction ID
             </div>
-            <div class="row mb-4">
-              <div class="col-6">
-                <div class="font-weight-bold">
-                  Original Amount
-                </div>
-                <span>{{transactionResponseModel?.fx?.merchant?.originalAmount}}</span>
-              </div>
-              <div class="col-6">
-                <div class="font-weight-bold">
-                  Original Currency
-                </div>
-                <span>{{transactionResponseModel?.fx?.merchant?.originalCurrency}}</span>
-              </div>
+            <span>{{transactionResponseModel?.transaction?.merchant?.transactionId}}</span>
+          </div>
+          <div class="col-6">
+            <div class="font-weight-bold">
+              Merchant
             </div>
-            <div class="row mb-4">
-              <div class="col-6">
-                <div class="font-weight-bold">
-                  Customer Number
-                </div>
-                <span>{{transactionResponseModel?.customerInfo?.number}}</span>
-              </div>
-              <div class="col-6">
-                <div class="font-weight-bold">
-                  Customer Name
-                </div>
-                <span>{{transactionResponseModel?.customerInfo?.billingFirstName}} {{transactionResponseModel?.customerInfo?.billingLastName}}</span>
-              </div>
+            <span>{{transactionResponseModel?.merchant?.name}}</span>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-6">
+            <div class="font-weight-bold">
+              Original Amount
             </div>
+            <span>{{transactionResponseModel?.fx?.merchant?.originalAmount}}</span>
+          </div>
+          <div class="col-6">
+            <div class="font-weight-bold">
+              Original Currency
+            </div>
+            <span>{{transactionResponseModel?.fx?.merchant?.originalCurrency}}</span>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-6">
+            <div class="font-weight-bold">
+              Customer Number
+            </div>
+            <span>{{transactionResponseModel?.customerInfo?.number}}</span>
+          </div>
+          <div class="col-6">
+            <div class="font-weight-bold">
+              Customer Name
+            </div>
+            <span>{{transactionResponseModel?.customerInfo?.billingFirstName}} {{transactionResponseModel?.customerInfo?.billingLastName}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <button class="btn btn-primary"
+                    (click)="getClientDetail(transactionResponseModel?.transaction.merchant.transactionId)">
+              <i class="fa fa-eye"></i>&nbsp;Show Client Detail
+            </button>
+            <a class="btn btn-info" [routerLink]="'/app/transaction/list'">
+              <i class="fa fa-arrow-left"></i>&nbsp;Back</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 d-flex justify-content-between">
-        <button class="btn btn-primary"
-                (click)="getClientDetail(transactionResponseModel?.transaction.merchant.transactionId)">Client Detail
-        </button>
-        <a class="btn btn-info" [routerLink]="'/app/transaction/list'">Back</a>
-      </div>
-    </div>
   </div>
-
 </div>
 
 <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"

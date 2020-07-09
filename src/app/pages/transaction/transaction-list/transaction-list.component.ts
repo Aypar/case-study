@@ -3,6 +3,7 @@ import {TransactionQueryResponseModel} from '../../../../models/transaction/tran
 import {TransactionService} from '../../../../services/api/transaction.service';
 import * as moment from 'moment';
 import {ToastrService} from 'ngx-toastr';
+import {LoadingService} from '../../../../services/loading-service';
 
 @Component({
   selector: 'app-transaction-list',
@@ -17,7 +18,7 @@ export class TransactionListComponent implements OnInit {
     toDate: moment().toDate()
   };
 
-  constructor(private transactionService: TransactionService, private toastrService: ToastrService) {
+  constructor(private transactionService: TransactionService, private toastrService: ToastrService, private loadingService: LoadingService) {
   }
 
   ngOnInit(): void {
@@ -25,22 +26,33 @@ export class TransactionListComponent implements OnInit {
   }
 
   getTransactionList() {
+    this.loadingService.show();
     this.transactionService.query(this.getQuery()).then((response) => {
       this.transactionQueryResponse = response.data;
     }).catch(error => {
       this.toastrService.error(error);
+    }).finally(() => {
+      this.loadingService.hide();
     });
   }
 
   nextPage() {
+    this.loadingService.show();
     this.transactionService.paginate(this.getQuery(), this.transactionQueryResponse.next_page_url).then((response) => {
       this.transactionQueryResponse = response.data;
+    }).finally(() => {
+      this.loadingService.hide();
+      window.scrollTo(0, 0);
     });
   }
 
   prevPage() {
+    this.loadingService.show();
     this.transactionService.paginate(this.getQuery(), this.transactionQueryResponse.prev_page_url).then((response) => {
       this.transactionQueryResponse = response.data;
+    }).finally(() => {
+      this.loadingService.hide();
+      window.scrollTo(0, 0);
     });
   }
 

@@ -1,5 +1,12 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import '~ngx-toastr/toastr';
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
+@import "./assets/scss/overrides";
 @import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/variables";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";;
+@import "./assets/scss/theme";
