@@ -19,10 +19,6 @@ import {TransactionComponent} from './transaction/transaction.component';
         {
           path: 'transaction',
           loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
-        },
-        {
-          path: 'client',
-          loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
         }
       ]
     }])

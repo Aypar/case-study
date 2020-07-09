@@ -7,6 +7,7 @@ import {TransactionListComponent} from './transaction-list/transaction-list.comp
 import {TransactionDetailComponent} from './transaction-detail/transaction-detail.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {FormsModule} from '@angular/forms';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [TransactionComponent, TransactionReportComponent, TransactionListComponent, TransactionDetailComponent],
@@ -26,7 +27,7 @@ import {FormsModule} from '@angular/forms';
             component: TransactionListComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: TransactionDetailComponent
           },
           {
@@ -37,7 +38,8 @@ import {FormsModule} from '@angular/forms';
       }
     ]),
     BsDatepickerModule.forRoot(),
-    FormsModule
+    FormsModule,
+    ModalModule
   ]
 })
 export class TransactionModule {

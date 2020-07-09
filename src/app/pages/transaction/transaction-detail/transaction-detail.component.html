@@ -1,1 +1,116 @@
-<p>transaction-detail works!</p>
+<div class="row" *ngIf="transactionResponseModel">
+  <div class="col-6 offset-3">
+    <div class="row mb-3 pb-3 border-bottom">
+      <div class="col-12 font-weight-bold"> Transaction Detail
+        - {{transactionResponseModel?.transaction?.merchant?.transactionId}}</div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="font-weight-bold">
+                  Transaction ID
+                </div>
+                <span>{{transactionResponseModel?.transaction?.merchant?.transactionId}}</span>
+              </div>
+              <div class="col-6">
+                <div class="font-weight-bold">
+                  Merchant
+                </div>
+                <span>{{transactionResponseModel?.merchant?.name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="font-weight-bold">
+                  Original Amount
+                </div>
+                <span>{{transactionResponseModel?.fx?.merchant?.originalAmount}}</span>
+              </div>
+              <div class="col-6">
+                <div class="font-weight-bold">
+                  Original Currency
+                </div>
+                <span>{{transactionResponseModel?.fx?.merchant?.originalCurrency}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="font-weight-bold">
+                  Customer Number
+                </div>
+                <span>{{transactionResponseModel?.customerInfo?.number}}</span>
+              </div>
+              <div class="col-6">
+                <div class="font-weight-bold">
+                  Customer Name
+                </div>
+                <span>{{transactionResponseModel?.customerInfo?.billingFirstName}} {{transactionResponseModel?.customerInfo?.billingLastName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between">
+        <button class="btn btn-primary"
+                (click)="getClientDetail(transactionResponseModel?.transaction.merchant.transactionId)">Client Detail
+        </button>
+        <a class="btn btn-info" [routerLink]="'/app/transaction/list'">Back</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Client Detail
+          - {{clientResponseModel?.customerInfo.number}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-4">
+          <div class="col-6">
+            <div class="font-weight-bold">Customer No</div>
+            <span>{{clientResponseModel?.customerInfo.number}}</span>
+          </div>
+          <div class="col-6">
+            <div class="font-weight-bold">Customer Name</div>
+            <span>{{clientResponseModel?.customerInfo.billingFirstName}} {{clientResponseModel?.customerInfo.billingLastName}}</span>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="font-weight-bold">Customer Address</div>
+            <span>
+              {{clientResponseModel?.customerInfo.billingAddress1}}
+              {{clientResponseModel?.customerInfo.billingAddress2}}
+              {{clientResponseModel?.customerInfo.billingCity}}
+              {{clientResponseModel?.customerInfo.billingCountry}}
+            </span>
+          </div>
+
+        </div>
+        <div class="row mb-4">
+          <div class="col-6">
+            <div class="font-weight-bold">Customer Email</div>
+            <span>{{clientResponseModel?.customerInfo.email}}</span>
+          </div>
+          <div class="col-6">
+            <div class="font-weight-bold">Customer Billing Phone</div>
+            <span>{{clientResponseModel?.customerInfo.billingPhone}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

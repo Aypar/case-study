@@ -1,17 +1,16 @@
 import {Injectable} from '@angular/core';
-
-import {TransactionGetResponseModel} from '../../models/transaction/transaction-get.response.model';
-import {TransactionGetRequestModel} from '../../models/transaction/transaction-get.request.model';
 import {ApiService} from './api.service';
-import {AxiosError, AxiosResponse} from 'axios';
+import {AxiosResponse} from 'axios';
+import {ClientGetRequestModel} from '../../models/client/client-get.request.model';
+import {ClientGetResponseModel} from '../../models/client/client-get.response.model';
 
 @Injectable({providedIn: 'root'})
 export class ClientService {
   constructor(private apiService: ApiService) {
   }
 
-  get(query: TransactionGetRequestModel): Promise<AxiosResponse<TransactionGetResponseModel>> {
-    return this.apiService.post<TransactionGetResponseModel>('client', query).execute().then(response => {
+  get(query: ClientGetRequestModel): Promise<AxiosResponse<ClientGetResponseModel>> {
+    return this.apiService.post<ClientGetResponseModel>('client', query).execute().then(response => {
       return response;
     }).catch(error => {
       return error;

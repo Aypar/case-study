@@ -11,6 +11,7 @@ export class ApiRequest<T> {
   private endPoint: string;
   private data: any;
   private storageService: StorageService;
+  private directUrl: string;
 
   constructor(type: Method, url, storageService: StorageService, data?: any) {
     this.storageService = storageService;
@@ -27,8 +28,10 @@ export class ApiRequest<T> {
   }
 
   execute(): Promise<AxiosResponse<T>> | any {
+
+    const requestUrl = this.directUrl ? this.directUrl : `${this.baseUrl}${this.endPoint}`;
     return this.http.request<T>({
-      baseURL: `${this.baseUrl}${this.endPoint}`,
+      baseURL: requestUrl,
       headers: this.getHeaders(),
       method: this.method,
       data: this.data
@@ -47,6 +50,11 @@ export class ApiRequest<T> {
 
   setUseToken(useToken: boolean) {
     this.useToken = useToken;
+    return this;
+  }
+
+  public setDirectUrl(url: string) {
+    this.directUrl = url;
     return this;
   }
 

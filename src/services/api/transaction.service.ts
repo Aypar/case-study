@@ -14,7 +14,7 @@ export class TransactionService {
   constructor(private apiService: ApiService) {
   }
 
-  report(query: TransactionReportRequestModel): Promise<AxiosResponse<TransactionReportResponseModel>>  {
+  report(query: TransactionReportRequestModel): Promise<AxiosResponse<TransactionReportResponseModel>> {
     return this.apiService.post<TransactionReportResponseModel>('transactions/report', query).execute().then(response => {
       return response;
     }).catch((error) => {
@@ -22,8 +22,16 @@ export class TransactionService {
     });
   }
 
-  query(query: TransactionQueryRequestModel): Promise<AxiosResponse<TransactionQueryResponseModel>>  {
+  query(query: TransactionQueryRequestModel): Promise<AxiosResponse<TransactionQueryResponseModel>> {
     return this.apiService.post<TransactionQueryResponseModel>('transaction/list', query).execute().then(response => {
+      return response;
+    }).catch((error) => {
+      return error;
+    });
+  }
+
+  paginate(query: TransactionQueryRequestModel, pageUrl: string): Promise<AxiosResponse<TransactionQueryResponseModel>> {
+    return this.apiService.post<TransactionQueryResponseModel>('', query).setDirectUrl(pageUrl).execute().then(response => {
       return response;
     }).catch((error) => {
       return error;

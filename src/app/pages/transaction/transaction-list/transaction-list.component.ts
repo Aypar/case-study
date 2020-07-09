@@ -12,7 +12,7 @@ export class TransactionListComponent implements OnInit {
 
   transactionQueryResponse: TransactionQueryResponseModel = {};
   filter: any = {
-    fromDate: moment().add(-7, 'day').toDate(),
+    fromDate: moment().add(-3, 'year').toDate(),
     toDate: moment().toDate()
   };
 
@@ -24,14 +24,27 @@ export class TransactionListComponent implements OnInit {
   }
 
   getTransactionList() {
-    this.transactionService.query({
-      fromDate: moment(this.filter.fromDate).format('YYYY-MM-DD'),
-      toDate: moment(this.filter.toDate).format('YYYY-MM-DD')
-    }).then((response) => {
-
-    }).catch(() => {
-
+    this.transactionService.query(this.getQuery()).then((response) => {
+      this.transactionQueryResponse = response.data;
     });
   }
 
+  nextPage() {
+    this.transactionService.paginate(this.getQuery(), this.transactionQueryResponse.next_page_url).then((response) => {
+      this.transactionQueryResponse = response.data;
+    });
+  }
+
+  prevPage() {
+    this.transactionService.paginate(this.getQuery(), this.transactionQueryResponse.prev_page_url).then((response) => {
+      this.transactionQueryResponse = response.data;
+    });
+  }
+
+  getQuery() {
+    return {
+      fromDate: moment(this.filter.fromDate).format('YYYY-MM-DD'),
+      toDate: moment(this.filter.toDate).format('YYYY-MM-DD')
+    };
+  }
 }
