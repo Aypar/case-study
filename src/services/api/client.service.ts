@@ -13,7 +13,7 @@ export class ClientService {
     return this.apiService.post<ClientGetResponseModel>('client', query).execute().then(response => {
       return response;
     }).catch(error => {
-      return error;
+      throw error;
     });
   }
 

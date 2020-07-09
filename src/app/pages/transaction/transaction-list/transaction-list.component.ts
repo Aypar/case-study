@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TransactionQueryResponseModel} from '../../../../models/transaction/transaction-query.response.model';
 import {TransactionService} from '../../../../services/api/transaction.service';
 import * as moment from 'moment';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-transaction-list',
@@ -16,7 +17,7 @@ export class TransactionListComponent implements OnInit {
     toDate: moment().toDate()
   };
 
-  constructor(private transactionService: TransactionService) {
+  constructor(private transactionService: TransactionService, private toastrService: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -26,6 +27,8 @@ export class TransactionListComponent implements OnInit {
   getTransactionList() {
     this.transactionService.query(this.getQuery()).then((response) => {
       this.transactionQueryResponse = response.data;
+    }).catch(error => {
+      this.toastrService.error(error);
     });
   }
 
@@ -42,9 +45,14 @@ export class TransactionListComponent implements OnInit {
   }
 
   getQuery() {
-    return {
-      fromDate: moment(this.filter.fromDate).format('YYYY-MM-DD'),
-      toDate: moment(this.filter.toDate).format('YYYY-MM-DD')
-    };
+    Object.keys(this.filter).forEach(key => {
+      if (this.filter[key] === 'undefined') {
+        delete this.filter[key];
+      }
+    });
+    let query = JSON.parse(JSON.stringify(this.filter));
+    query.fromDate = moment(query.fromDate).format('YYYY-MM-DD');
+    query.toDate = moment(query.toDate).format('YYYY-MM-DD');
+    return query;
   }
 }

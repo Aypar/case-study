@@ -14,7 +14,7 @@ export class AuthenticationService {
   }
 
 
-  login(authenticationRequestModel: AuthenticationRequestModel): Promise<boolean>{
+  login(authenticationRequestModel: AuthenticationRequestModel): Promise<boolean> {
     return this.apiService.post<AuthenticationResponseModel>('merchant/user/login', authenticationRequestModel)
       .setUseToken(false)
       .execute()
@@ -27,7 +27,7 @@ export class AuthenticationService {
         }
       })
       .catch((error) => {
-        return error;
+        throw  error;
       });
 
   }

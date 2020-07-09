@@ -3,6 +3,7 @@ import {CustomerInfoModel} from '../customer-info.model';
 import {MerchantModel} from '../merchant.model';
 import {AcquirerTransactionsModel} from '../acquirer-transactions.model';
 import {QueryResponseBaseModel} from '../base/query-response.base.model';
+import {TransactionModel} from './transaction.model';
 
 export interface TransactionQueryResponseModel extends QueryResponseBaseModel {
   data?: Array<{
@@ -10,7 +11,7 @@ export interface TransactionQueryResponseModel extends QueryResponseBaseModel {
     customerInfo?: CustomerInfoModel;
     merchant: MerchantModel;
     ipn: Array<string>;
-    transaction: { merchant: { referenceNo: string, status: string, transactionId: string } };
+    transaction: { merchant: TransactionModel };
     acquirer: AcquirerTransactionsModel;
     refundable: boolean
   }>

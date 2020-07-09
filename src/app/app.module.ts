@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthGuard} from '../guards/auth.guard';
+import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {AuthGuard} from '../guards/auth.guard';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
         {
           path: '',

@@ -1,19 +1,90 @@
 <div class="row">
-  <div class="col-6 offset-3">
+  <div class="col-10 offset-1">
     <div class="row mb-5 d-flex align-items-center border-bottom py-2">
-      <div class="col-3 font-weight-bold">Transaction List</div>
-      <div class="col-9 font-weight-bold d-flex justify-content-end">
+      <div class="col-12 font-weight-bold">Transaction List</div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-12 d-flex justify-content-between">
         <label for="fromDate" class="mr-2">
           From Date
           <input id="fromDate" bsDatepicker class="form-control" [(ngModel)]="filter.fromDate"/>
+
         </label>
         <label for="toDate" class="mr-2">
           To Date
           <input id="toDate" bsDatepicker class="form-control" [(ngModel)]="filter.toDate"/>
         </label>
-        <div class="d-flex align-items-end pb-2">
-          <button (click)="getTransactionList()" class="btn btn-primary">Filter</button>
-        </div>
+        <label for="status">
+          Status
+          <select class="form-control" id="status" [(ngModel)]="filter.status">
+            <option [value]="undefined">All</option>
+            <option value="APPROVED">APPROVED</option>
+            <option value="WAITING">WAITING</option>
+            <option value="DECLINED">DECLINED</option>
+            <option value="ERROR">ERROR</option>
+          </select>
+        </label>
+        <label for="operation">
+          Operation
+          <select class="form-control" id="operation" [(ngModel)]="filter.operation">
+            <option [value]="undefined">All</option>
+            <option value="DIRECT">DIRECT</option>
+            <option value="REFUND">REFUND</option>
+            <option value="3D">3D</option>
+            <option value="3DAUTH">3DAUTH</option>
+            <option value="STORED">STORED</option>
+          </select>
+        </label>
+        <label for="paymentMethod">
+          Payment Method
+          <select class="form-control" id="paymentMethod" [(ngModel)]="filter.paymentMethod">
+            <option [value]="undefined">All</option>
+            <option value="CREDITCARD">CREDITCARD</option>
+            <option value="CUP">CUP</option>
+            <option value="IDEAL">IDEAL</option>
+            <option value="GIROPAY">GIROPAY</option>
+            <option value="MISTERCASH">MISTERCASH</option>
+            <option value="STORED">STORED</option>
+            <option value="PAYTOCARD">PAYTOCARD</option>
+            <option value="CEPBANK">CEPBANK</option>
+            <option value="CITADEL">CITADEL</option>
+          </select>
+        </label>
+        <label for="errorCode">
+          Error Code
+          <select class="form-control" id="errorCode" [(ngModel)]="filter.errorCode">
+            <option [value]="undefined">All</option>
+            <option value="Do not honor">Do not honor</option>
+            <option value="Invalid Transaction">Invalid Transaction</option>
+            <option value="Invalid Card">Invalid Card</option>
+            <option value="Not sufficient funds">Not sufficient funds</option>
+            <option value="Incorrect PIN">Incorrect PIN</option>
+            <option value="Invalid country association">Invalid country association</option>
+            <option value="Currency not allowed">Currency not allowed</option>
+            <option value="3-D Secure Transport Error">3-D Secure Transport Error</option>
+            <option value="Transaction not permitted to cardholder">Transaction not
+              permitted to cardholder
+            </option>
+          </select>
+        </label>
+        <label for="filterField">
+          Filter By
+          <select class="form-control" id="filterField" [(ngModel)]="filter.filterField">
+            <option [value]="undefined">All</option>
+            <option value="Transaction UUID">Transaction UUID</option>
+            <option value="Customer Email">CUP</option>
+            <option value="Reference No">IDEAL</option>
+            <option value="Custom Data">Custom Data</option>
+            <option value="Card PAN">Card PAN</option>
+          </select>
+        </label>
+        <label *ngIf="filter.filterField !== undefined" for="filterBy">
+          {{filter.filterField}}
+          <input id="filterBy" type="text" class="form-control" [(ngModel)]="filter.filterValue"/>
+        </label>
+      </div>
+      <div class="text-right pb-2 w-100">
+        <button (click)="getTransactionList()" class="btn btn-primary">Filter</button>
       </div>
     </div>
     <div class="row">
@@ -21,6 +92,9 @@
         <table class="table table-hover table-striped table-bordered">
           <thead>
           <tr>
+            <th>Transaction ID</th>
+            <th>Status</th>
+            <th>Operation</th>
             <th>Reference No</th>
             <th>Customer Number</th>
             <th>Customer Name</th>
@@ -37,6 +111,15 @@
           </tr>
           <ng-container *ngIf="transactionQueryResponse?.data?.length > 0">
             <tr *ngFor="let item of transactionQueryResponse.data">
+              <td>
+                {{item.transaction.merchant.transactionId}}
+              </td>
+              <td>
+                {{item.transaction.merchant.status}}
+              </td>
+              <td>
+                {{item.transaction.merchant.operation}}
+              </td>
               <td>
                 {{item.transaction.merchant.referenceNo}}
               </td>

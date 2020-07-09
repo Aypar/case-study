@@ -7,7 +7,7 @@ import {TransactionQueryRequestModel} from '../../models/transaction/transaction
 import {TransactionReportRequestModel} from '../../models/transaction/transaction-report.request.model';
 import {TransactionGetRequestModel} from '../../models/transaction/transaction-get.request.model';
 import {ApiService} from './api.service';
-import {AxiosError, AxiosResponse} from 'axios';
+import { AxiosResponse} from 'axios';
 
 @Injectable({providedIn: 'root'})
 export class TransactionService {
@@ -18,7 +18,7 @@ export class TransactionService {
     return this.apiService.post<TransactionReportResponseModel>('transactions/report', query).execute().then(response => {
       return response;
     }).catch((error) => {
-      return error;
+      throw error;
     });
   }
 
@@ -26,7 +26,7 @@ export class TransactionService {
     return this.apiService.post<TransactionQueryResponseModel>('transaction/list', query).execute().then(response => {
       return response;
     }).catch((error) => {
-      return error;
+      throw error;
     });
   }
 
@@ -34,7 +34,7 @@ export class TransactionService {
     return this.apiService.post<TransactionQueryResponseModel>('', query).setDirectUrl(pageUrl).execute().then(response => {
       return response;
     }).catch((error) => {
-      return error;
+      throw error;
     });
   }
 
@@ -42,7 +42,7 @@ export class TransactionService {
     return this.apiService.post<TransactionGetResponseModel>('transaction', query).execute().then(response => {
       return response;
     }).catch((error) => {
-      return error;
+      throw error;
     });
   }
 

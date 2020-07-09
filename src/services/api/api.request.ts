@@ -19,7 +19,13 @@ export class ApiRequest<T> {
   }
 
   init(method: Method, endPoint: string, data?: any, contentType = this.contentType) {
-    this.http = axios.create();
+    this.http = axios.create(
+      {
+        validateStatus: (status) => {
+          return true;
+        }
+      }
+    );
     this.method = method;
     this.baseUrl = environment.apiUrl;
     this.endPoint = endPoint;
@@ -36,15 +42,14 @@ export class ApiRequest<T> {
       method: this.method,
       data: this.data
     }).then((response: AxiosResponse<T>) => {
-      if (response.status === 401) {
-        window.location.href = '/auth/login';
+      if (response.status !== 200) {
+        if (response.status === 401) {
+          window.location.href = '/auth/login';
+          return;
+        }
+        throw Error(response.statusText);
       }
       return response;
-    }).catch((error: AxiosError) => {
-      if (error.response.status === 401) {
-        window.location.href = '/auth/login';
-      }
-      return error;
     });
   }
 
