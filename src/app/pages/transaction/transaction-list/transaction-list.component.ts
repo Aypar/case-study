@@ -62,6 +62,7 @@ export class TransactionListComponent implements OnInit {
         delete this.filter[key];
       }
     });
+    this.filter.filterValue = this.filter.filterField ? this.filter.filterValue : undefined;
     let query = JSON.parse(JSON.stringify(this.filter));
     query.fromDate = moment(query.fromDate).format('YYYY-MM-DD');
     query.toDate = moment(query.toDate).format('YYYY-MM-DD');
